@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Blog(models.Model):
        owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog")
        title = models.CharField(max_length=1000)
-       blog_img = models.ImageField(upload_to = 'pic_folder/')
+       short_body = models.CharField(max_length=5000)
+       blog_img = models.ImageField(upload_to = 'media/')
        body = models.TextField()
        like = models.ManyToManyField(User, related_name='blog_posts', blank=True)
        created_time = models.DateTimeField(auto_now_add=True, null=True)
