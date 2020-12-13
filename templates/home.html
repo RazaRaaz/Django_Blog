@@ -9,27 +9,40 @@
        <link rel="stylesheet" href="{% static '/styles/home.css' %}">
 </head>
 <body>
-       <nav class="navbar">
-              <ul>
-                     <li><a href="">Home</a></li>
-                     <li><a href="{% url 'login' %}">Login</a></li>
-                     <li><a href="{% url 'register' %}">Sign Up</a></li>
-              </ul>
-       </nav>
-       <h3 class="total">Total Posts : {{ total }}</h3>
-       <div class="posts">
-              {% for post in posts %}
-                     <div class="post">
-                            <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
-                            <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
-                            <p class="post_s_body">{{ post.short_body }}</p>
-                            <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>
-                            <h3 class="likes">Likes : {{ post.get_likes | wordcount }}</h3>
-                            <button class="read_more"><a href="posts/{{ post.id }}">Read More</a></button>
-                     </div>
-              {% endfor %}
-       </div>
 
+       {% if user.is_authenticated %}
+              <nav class="navbar">
+                     <ul>
+                            <li class="user">{{ user }}</li>
+                            <li><a href="">Home</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                     </ul>
+              </nav>
+
+              <h3 class="total">Total Posts : {{ total }}</h3>
+              <div class="posts">
+                     {% for post in posts %}
+                            <div class="post">
+                                   <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
+                                   <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
+                                   <p class="post_s_body">{{ post.short_body }}</p>
+                                   <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>
+                                   <h3 class="likes">Likes : {{ post.get_likes | wordcount }}</h3>
+                                   <button class="read_more"><a href="posts/{{ post.id }}">Read More</a></button>
+                            </div>
+                     {% endfor %}
+              </div>
+       {% else %}
+              <nav class="navbar">
+                     <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'register' %}">Sign Up</a></li>
+                     </ul>
+              </nav>
+
+              <h1 class="login_warning">Please Login first to Use App!</h1>
+       {% endif %}
      
 </body>
 </html>

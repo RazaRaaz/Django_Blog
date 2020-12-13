@@ -6,7 +6,7 @@ body{
        text-align: center;
 }
 
-.login-form{
+.register-form{
        padding: 40px 40px;
        margin: 10% auto;
        color: rgb(3, 3, 3);
@@ -21,11 +21,11 @@ li{
        border-radius: 10px;
 }
 
-.login-form input{
+.register-form input{
        padding: 4px;
 }
 
-.login-form button{
+.register-form button{
        background: rgb(14, 14, 14);
        color: white;
        padding: 10px;

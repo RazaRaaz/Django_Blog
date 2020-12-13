@@ -2,12 +2,14 @@ body{
        margin: 0px;
        padding: 0px;
        font-family: Verdana, Geneva, Tahoma, sans-serif;
-       background: rgb(141, 141, 141);
-
+       background: #d6a213;
 }
 
 /* for navbar styles */
-
+.user{
+       font-size: 23px;
+       font-weight: 700;
+}
 .navbar{
        padding: 10px;
 }
@@ -24,8 +26,15 @@ body{
 .navbar ul li a{
        text-decoration: none;
        padding: 10px;
-       background: rgb(255, 255, 255);
-       color: rgb(0, 0, 0);
+       background: rgb(29, 29, 29);
+       color: rgb(252, 252, 252);
+}
+
+/* Not login */
+
+.login_warning{
+       text-align: center;
+       margin-top: 20%;
 }
 
 /* for blog posts */
