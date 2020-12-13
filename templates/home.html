@@ -1,40 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-       <style>
-              body{
-                     padding: 10px;
-                     font-family: Verdana, Geneva, Tahoma, sans-serif;
-                     text-align: center;
-              }
-              .posts{
-                     width: 100%;
-              }
-              .post{
-                     width: 70%;
-                     margin: 100px auto;
-              }
-              a{
-                     text-decoration: none;
-                     color: black;
-              }
-       </style>
+
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <title>Home</title>
        {% load static %}
+       <link rel="stylesheet" href="{% static '/styles/home.css' %}">
 </head>
 <body>
+       <nav class="navbar">
+              <ul>
+                     <li><a href="">Home</a></li>
+                     <li><a href="{% url 'login' %}">Login</a></li>
+                     <li><a href="{% url 'register' %}">Sign Up</a></li>
+              </ul>
+       </nav>
+       <h3 class="total">Total Posts : {{ total }}</h3>
        <div class="posts">
               {% for post in posts %}
                      <div class="post">
-                            <a href=""><h1 class="post_title">{{ post.title }}</h1></a>
+                            <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
                             <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
-                            <p class="post_body">{{ post.short_body }}</p>
+                            <p class="post_s_body">{{ post.short_body }}</p>
                             <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>
-                            <button><a href="">Read More</a></button>
+                            <h3 class="likes">Likes : {{ post.get_likes | wordcount }}</h3>
+                            <button class="read_more"><a href="posts/{{ post.id }}">Read More</a></button>
                      </div>
               {% endfor %}
        </div>
+
+     
 </body>
 </html>

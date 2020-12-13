@@ -3,6 +3,6 @@ from .models import Blog, Comment
 
 
 class BlogAdmin(admin.ModelAdmin):
-       list_display = ["owner", "title", "body", "created_time", "get_likes"]
+       list_display = ["id", "owner", "title", "body", "created_time", "get_likes"]
 
 admin.site.register(Blog, BlogAdmin) 

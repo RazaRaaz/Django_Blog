@@ -14,6 +14,9 @@ class Blog(models.Model):
        def get_likes(self):
               return "\n".join([str(p) for p in self.like.all()])
 
+       class Meta:
+              ordering = ['-id']
+
 
 class Comment(models.Model):
        owner = models.ForeignKey(User, on_delete=models.CASCADE)

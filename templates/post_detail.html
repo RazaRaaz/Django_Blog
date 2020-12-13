@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       {% load static %}
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="{% static '/styles/detail.css' %}">
+       <title>{{ post.title }}</title>
+</head>
+<body>
+       <div class="post">
+              <a class="title" href=""><h1 class="post_title">{{ post.title }}</h1></a>
+              <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
+              <p class="post_body">{{ post.body }}</p>
+              <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>                     
+              
+              <h4>Likes: {{ post.get_likes | wordcount}}</h4>
+
+              <button class="read_more"><a href="{% url 'home' %}">Back to Home</a></button>
+       </div>
+</body>
+</html>
