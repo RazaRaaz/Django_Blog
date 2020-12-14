@@ -4,7 +4,31 @@ body{
        font-family: Verdana, Geneva, Tahoma, sans-serif;
        background: #d6a213;
 }
+/* for navbar styles */
+.user{
+       font-size: 23px;
+       font-weight: 700;
+}
+.navbar{
+       padding: 10px;
+}
 
+.navbar ul{
+       display: flex;
+       list-style: none;
+}
+
+.navbar ul li{
+       margin: 0 10px;
+}
+
+.navbar ul li a{
+       text-decoration: none;
+       padding: 10px;
+       background: rgb(29, 29, 29);
+       color: rgb(252, 252, 252);
+}
+/* end Nav */
 .post{
        width: 70%;
        margin: 50px auto;

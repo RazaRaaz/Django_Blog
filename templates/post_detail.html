@@ -4,28 +4,49 @@
        {% load static %}
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
        <link rel="stylesheet" href="{% static '/styles/detail.css' %}">
+
        <title>{{ post.title }}</title>
 </head>
 <body>
+       <nav class="navbar">
+              <ul>
+                     <li class="user">{{ user }}</li>
+                     <li><a href="{% url 'home' %}">Home</a></li>
+                     <li><a href="{% url 'myposts' %}">My Posts</a></li>
+                     <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                     <li><a href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+       </nav>
        <div class="post">
               <a class="title" href=""><h1 class="post_title">{{ post.title }}</h1></a>
               <img width="60%" height="500px" src="{{post.blog_img.url}}" alt="">
-              <p class="post_body">{{ post.body }}</p>
+              <p class="post_body">{{ post.body | linebreaks }}</p>
               <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>                     
               
               <form action="/posts/{{ post.id }}" method="post">
                      {% csrf_token %}
+
                      {% if like %}
-                            <input type="submit" checked id="" value="dislike">
+                            <input type="submit" id="" value="dislike">
                      {% else %}
                             <input type="submit" id="" value="like">
                      {% endif %}
-              </form>
-              
 
-               
-              
+                                                               
+              </form>
+
+              <form>
+                     {% csrf_token %}
+
+                     {% if post.owner == user %}
+                            <input type="submit" id="" value="Delete">
+                            <input type="submit" id="" value="Edit">
+                     {% endif %}
+                                                               
+              </form>
+
               
               <h4>Likes: {{ post.get_likes | wordcount}}</h4>
               

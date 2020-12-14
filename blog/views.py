@@ -3,9 +3,7 @@ from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import Blog, Comment
-from .forms import RegisterForm
-
-
+from .forms import RegisterForm, CreatePostForm
 
 
 class HomeView(generic.View):
@@ -20,6 +18,24 @@ class HomeView(generic.View):
               }
 
               return render(request, 'home.html', context=data)
+
+
+
+class MyPostsView(generic.View):
+       def get(self, request):
+              posts = Blog.objects.filter(owner=request.user)
+              
+              data = {
+                     "posts":posts,
+                     'total':posts.count(),
+                     "user":request.user
+              }
+
+              return render(request, 'myposts.html', context=data)
+
+       def post(self, request):
+              return HttpResponse('POST request!')
+
 
 
 class PostDetailView(generic.View):
@@ -83,3 +99,42 @@ class RegisterView(generic.View):
                             user.save()
                             return redirect('/')
               
+
+
+
+class CreatePostView(generic.View):
+       
+       def get(self, request):
+              form = CreatePostForm()
+              data = {
+                     'form':form
+              }
+              return render(request, 'create_post.html', context=data)
+
+
+       def post(self, request):
+              
+              form = CreatePostForm(request.POST, request.FILES)
+              
+              if form.is_valid():
+
+                     title = form.cleaned_data.get("title")
+                     short_body = form.cleaned_data.get("short_body")
+                     blog_img = form.cleaned_data.get("blog_img")
+                     body = form.cleaned_data.get("body")
+
+                     post = Blog.objects.create(
+                            owner=request.user,
+                            title=title,
+                            short_body=short_body,
+                            blog_img=blog_img,
+                            body=body
+                     )
+                     post.save()
+                     return redirect('/')
+              else:
+                     data = {
+                            'form':form,
+                            "error":"Invalid Post Data"
+                     }
+                     return render(request, 'create_post.html', context=data)

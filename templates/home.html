@@ -14,13 +14,16 @@
               <nav class="navbar">
                      <ul>
                             <li class="user">{{ user }}</li>
-                            <li><a href="">Home</a></li>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'myposts' %}">My Posts</a></li>
+                            <li><a href="{% url 'create_post' %}">Create Post</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                      </ul>
               </nav>
 
               <h3 class="total">Total Posts : {{ total }}</h3>
               <div class="posts">
+                     
                      {% for post in posts %}
                             <div class="post">
                                    <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
@@ -30,7 +33,9 @@
                                    <h3 class="likes">Likes : {{ post.get_likes | wordcount }}</h3>
                                    <button class="read_more"><a href="posts/{{ post.id }}">Read More</a></button>
                             </div>
-                     {% endfor %}
+                     {% endfor %}       
+                            
+                     
               </div>
        {% else %}
               <nav class="navbar">

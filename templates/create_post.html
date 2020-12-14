@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       {% load static %}
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Create Post</title>
+       <link rel="stylesheet" href="{% static '/styles/login.css' %}">
+</head>
+<body>
+       <form class="create_post_form" action="/createpost/" enctype="multipart/form-data" method="post">
+              <h1>Create Post</h1>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button class="create_btn" type="submit">Create</button>
+       </form>
+       {{error}}
+       <button class="create_btn"><a href="/">Go Back To Home</a></button>
+</body>
+</html>
