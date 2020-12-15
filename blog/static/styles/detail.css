@@ -2,16 +2,21 @@ body{
        margin: 0px;
        padding: 0px;
        font-family: Verdana, Geneva, Tahoma, sans-serif;
-       background: #d6a213;
+       background: #e2e2e2;
+
 }
+
 /* for navbar styles */
 .user{
-       font-size: 23px;
-       font-weight: 700;
+       margin: 15px 100px;
 }
 .navbar{
        padding: 10px;
+       width: 90%;
+       display: flex;
+       justify-content: space-between;
 }
+
 
 .navbar ul{
        display: flex;
@@ -22,13 +27,47 @@ body{
        margin: 0 10px;
 }
 
+
+
 .navbar ul li a{
        text-decoration: none;
        padding: 10px;
-       background: rgb(29, 29, 29);
-       color: rgb(252, 252, 252);
+       color: rgb(8, 8, 8);
+       transition: 0.3s;
+       text-decoration: none;
 }
-/* end Nav */
+
+   
+.navbar ul li a::after {
+       content: '';
+       display: block;
+       width: 0;
+       margin-top: 10px;
+       height: 2px;
+       background: #000;
+       transition: width .3s;
+}
+
+.navbar ul li a:hover::after {
+       width: 110%;
+}
+
+@media (max-width:700px){
+       .navbar{
+              flex-direction: column;
+              text-align: center;
+              width: 90%;
+              justify-content: center;
+              align-items: center;
+       }
+
+       .user{
+              margin: 10px auto;
+              padding: 10px;
+       }
+}
+
+
 .post{
        width: 70%;
        margin: 50px auto;
@@ -61,8 +100,50 @@ body{
        width: 100%;
 }
 
+/* likes-count */
+
+.likes-count{
+       background-color: black;
+       color: white;
+       padding: 5px;
+       border: none;
+
+       display: inline-block;
+       text-transform: uppercase;
+}
+
+/* btns  */
+
+.like-btn{
+       background-color: black;
+       color: white;
+       padding: 5px;
+       border: none;
+       margin: 10px;
+       text-transform: uppercase;
+}
+
+.dislike-btn{
+       background-color: rgb(138, 49, 240);
+       color: rgb(255, 249, 249);
+       padding: 5px;
+       border: none;
+       margin: 10px;
+       text-transform: uppercase;
+
+}
+
+.delete-btn{
+       background-color: rgb(252, 5, 67);
+       text-transform: uppercase;
+       color: rgb(255, 249, 249);
+       padding: 5px;
+       border: none;
+       margin: 10px;
+}
 
 
+/* end btns */
 @media (max-width:800px){
        .post img{
               width: 90%;

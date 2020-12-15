@@ -6,17 +6,18 @@
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <title>Home</title>
        {% load static %}
+       
        <link rel="stylesheet" href="{% static '/styles/home.css' %}">
 </head>
 <body>
 
        {% if user.is_authenticated %}
               <nav class="navbar">
+                     <h1 class="user">{{ user }}</h1>
                      <ul>
-                            <li class="user">{{ user }}</li>
                             <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'myposts' %}">My Posts</a></li>
-                            <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                            <li><a href="{% url 'myposts' %}">MyPosts</a></li>
+                            <li><a href="{% url 'create_post' %}">CreatePost</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                      </ul>
               </nav>
@@ -25,7 +26,9 @@
               <div class="posts">
                      
                      {% for post in posts %}
+                     
                             <div class="post">
+                                   <h3>Created At : <span class="created_post_time">{{ post.created_time }}</span></h3>
                                    <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
                                    <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
                                    <p class="post_s_body">{{ post.short_body }}</p>

@@ -10,16 +10,15 @@
 </head>
 <body>
 
-
        <nav class="navbar">
+              <h1 class="user">{{ user }}</h1>
               <ul>
-                     <li class="user">{{ user }}</li>
                      <li><a href="{% url 'home' %}">Home</a></li>
+                     <li><a href="{% url 'myposts' %}">My Posts</a></li>
                      <li><a href="{% url 'create_post' %}">Create Post</a></li>
                      <li><a href="{% url 'logout' %}">Logout</a></li>
               </ul>
        </nav>
-
        <h3 class="total">My Total Posts : {{ total }}</h3>
        <div class="posts">
               {% for post in posts %}

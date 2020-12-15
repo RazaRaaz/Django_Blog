@@ -1,18 +1,21 @@
 body{
        margin: 0px;
        padding: 0px;
-       font-family: Verdana, Geneva, Tahoma, sans-serif;
-       background: #d6a213;
+       font-family: Helvetica;
+       background: #e2e2e2;
 }
 
 /* for navbar styles */
 .user{
-       font-size: 23px;
-       font-weight: 700;
+       margin: 15px 100px;
 }
 .navbar{
        padding: 10px;
+       width: 90%;
+       display: flex;
+       justify-content: space-between;
 }
+
 
 .navbar ul{
        display: flex;
@@ -23,11 +26,45 @@ body{
        margin: 0 10px;
 }
 
+
+
 .navbar ul li a{
        text-decoration: none;
        padding: 10px;
-       background: rgb(29, 29, 29);
-       color: rgb(252, 252, 252);
+       color: rgb(8, 8, 8);
+       transition: 0.3s;
+       text-decoration: none;
+}
+
+   
+.navbar ul li a::after {
+       content: '';
+       display: block;
+       width: 0;
+       margin-top: 10px;
+       height: 2px;
+       background: #000;
+       transition: width .3s;
+}
+
+.navbar ul li a:hover::after {
+       width: 110%;
+}
+
+
+@media (max-width:700px){
+       .navbar{
+              flex-direction: column;
+              text-align: center;
+              width: 90%;
+              justify-content: center;
+              align-items: center;
+       }
+
+       .user{
+              margin: 10px auto;
+              padding: 10px;
+       }
 }
 
 /* Not login */
@@ -40,11 +77,10 @@ body{
 /* for blog posts */
 
 .total{
-       margin-left: 5%;
-       background: black;
-       display: inline-block;
-       padding: 10px;
-       color: white;
+       margin: 0 auto;
+       text-align: center;
+       font-weight: 600;
+       font-size: 25px;
 }
 
 .posts{
@@ -55,7 +91,7 @@ body{
        width: 70%;
        margin: 50px auto;
        background: rgb(255, 253, 253);
-       padding: 10px;
+       padding: 20px 10px;
 }
 
 .title{
@@ -78,6 +114,9 @@ body{
        text-decoration: none;
 }
 
+.created_post_time{
+       font-weight: 500;
+}
 
 @media (max-width:800px){
        .post img{

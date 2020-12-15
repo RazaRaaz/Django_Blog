@@ -11,15 +11,17 @@
 </head>
 <body>
        <nav class="navbar">
+              <h1 class="user">{{ user }}</h1>
               <ul>
-                     <li class="user">{{ user }}</li>
                      <li><a href="{% url 'home' %}">Home</a></li>
                      <li><a href="{% url 'myposts' %}">My Posts</a></li>
                      <li><a href="{% url 'create_post' %}">Create Post</a></li>
                      <li><a href="{% url 'logout' %}">Logout</a></li>
               </ul>
        </nav>
+       <!-- Read Post -->
        <div class="post">
+              <span>{{ post.created_time }}</span>
               <a class="title" href=""><h1 class="post_title">{{ post.title }}</h1></a>
               <img width="60%" height="500px" src="{{post.blog_img.url}}" alt="">
               <p class="post_body">{{ post.body | linebreaks }}</p>
@@ -29,28 +31,29 @@
                      {% csrf_token %}
 
                      {% if like %}
-                            <input type="submit" id="" value="dislike">
+                            <input class="dislike-btn" type="submit" id="" value="dislike">
                      {% else %}
-                            <input type="submit" id="" value="like">
+                            <input class="like-btn" type="submit" id="" value="like">
                      {% endif %}
 
                                                                
               </form>
 
-              <form>
+              <form method="POST" action="/delete_post/{{ post.id }}">
                      {% csrf_token %}
 
                      {% if post.owner == user %}
-                            <input type="submit" id="" value="Delete">
-                            <input type="submit" id="" value="Edit">
+                            <input class="delete-btn" type="submit" id="" value="Delete">
                      {% endif %}
                                                                
               </form>
 
-              
-              <h4>Likes: {{ post.get_likes | wordcount}}</h4>
-              
+              <p class="likes-count">Likes: {{ post.get_likes | wordcount}}</p>
+              <br>
               <button class="read_more"><a href="{% url 'home' %}">Back to Home</a></button>
+              <span>{{ post.created_time }}</span>
        </div>
+       <!-- Comments -->
+
 </body>
 </html>

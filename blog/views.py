@@ -138,3 +138,13 @@ class CreatePostView(generic.View):
                             "error":"Invalid Post Data"
                      }
                      return render(request, 'create_post.html', context=data)
+
+
+       
+class DeletePostView(generic.View):
+
+       def post(self, request, pk):
+              post = Blog.objects.get(pk=pk)
+              post.delete()
+              return redirect('/myposts/')
+                     
