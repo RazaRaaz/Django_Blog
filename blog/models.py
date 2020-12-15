@@ -18,8 +18,11 @@ class Blog(models.Model):
               ordering = ['-id']
 
 
+       def __str__(self):
+              return self.title
+
 class Comment(models.Model):
-       owner = models.ForeignKey(User, on_delete=models.CASCADE)
+       owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment')
        blog = models.ForeignKey(
               Blog, 
               on_delete=models.CASCADE, 
@@ -27,4 +30,8 @@ class Comment(models.Model):
        )
        body = models.TextField()
        like = models.ManyToManyField(User, related_name="blog_comments", blank=True)
-       created_time = models.DateTimeField(auto_now_add=True, null=True)
+       created_time = models.DateTimeField(auto_now_add=True)
+
+
+       class Meta:
+              ordering = ['-id']

@@ -6,6 +6,8 @@
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
        <link rel="stylesheet" href="{% static '/styles/detail.css' %}">
+       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+       <script src="{% static '/js/app.js' %}"></script>
 
        <title>{{ post.title }}</title>
 </head>
@@ -21,7 +23,7 @@
        </nav>
        <!-- Read Post -->
        <div class="post">
-              <span>{{ post.created_time }}</span>
+              <h3>Created At : <span class="created_time">{{ post.created_time }}</span></h3>
               <a class="title" href=""><h1 class="post_title">{{ post.title }}</h1></a>
               <img width="60%" height="500px" src="{{post.blog_img.url}}" alt="">
               <p class="post_body">{{ post.body | linebreaks }}</p>
@@ -50,10 +52,33 @@
 
               <p class="likes-count">Likes: {{ post.get_likes | wordcount}}</p>
               <br>
-              <button class="read_more"><a href="{% url 'home' %}">Back to Home</a></button>
-              <span>{{ post.created_time }}</span>
-       </div>
+              
        <!-- Comments -->
-
+       
+              <div class="comments">
+                     <h1 class="comment-head">Comments</h1>
+                     <form class="comment_form" method="POST" action="/createcomment/{{ post.id }}" >
+                            {% csrf_token %}
+                            {{ comment_form }}
+                            <button type="submit">Add Comment</button>                        
+                     </form>
+                     {% for comment in comments %}
+                            <div class="comment">
+                                   <h3 class="from_comment">{{ comment.owner }}</h3>
+                                   <p class="comment_body">{{ comment.body }}</p>
+                                   <h5>Created At : <span class="created_time">{{ comment.created_time }}</span></h5>
+                                   <form method="POST" id="delete_comment" action="/deletecomment/{{comment.id}}">
+                                          {% csrf_token %}
+                                          {% if comment.owner == user %}
+                                                 <input type="hidden" name="{{ post.id }}"  value="nextUrl">
+                                                 <input class="delete-btn" type="submit"  value="Delete">
+                                          {% endif %}                                           
+                                   </form>
+                            </div>
+                     {% endfor %}
+                            
+              </div>
+       </div>
+       
 </body>
 </html>

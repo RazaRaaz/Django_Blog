@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect, HttpResponse
 from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import Blog, Comment
-from .forms import RegisterForm, CreatePostForm
+from .forms import RegisterForm, CreatePostForm, CreateCommentForm
+
+
 
 
 class HomeView(generic.View):
@@ -42,13 +44,16 @@ class PostDetailView(generic.View):
 
        def get(self, request, pk):
               post = get_object_or_404(Blog, pk=pk)
-
-
+              comments = post.comnents.all()
+              comment_form = CreateCommentForm()
               data = {
                      "post":post,
                      "user":request.user,
+                     'comments':comments,
+                     'comment_form':comment_form,
                      'like':post.like.filter(id=request.user.id).exists()
               }
+
               return render(request, 'post_detail.html', context=data)
 
 
@@ -148,3 +153,36 @@ class DeletePostView(generic.View):
               post.delete()
               return redirect('/myposts/')
                      
+
+
+class AddCommentView(generic.View):
+
+       def post(self, request, pk):
+              
+              form = CreateCommentForm(request.POST)
+              
+              if form.is_valid():
+                     body = form.data['body']
+                     
+                     comment = Comment.objects.create(
+                            owner=request.user,
+                            blog=Blog.objects.get(pk=pk),
+                            body=body
+                     )
+
+                     comment.save()
+                     return redirect(f'/posts/{pk}')
+              else:
+                     return HttpResponse("error")
+
+
+
+class DeleteCommentView(generic.View):
+      
+       def post(self, request, pk):
+              comment = Comment.objects.get(pk=pk)
+              comment.delete()
+
+              d = list(request.POST.keys())
+              url = d[1] 
+              return redirect(f"/posts/{url}")

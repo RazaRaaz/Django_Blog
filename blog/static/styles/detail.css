@@ -149,3 +149,69 @@ body{
               width: 90%;
        }
 }
+
+.created_time{
+       font-weight: 500;
+}
+
+
+/* Comments Section */
+
+.comment-head{
+       margin: 20px 10px;
+}
+
+.comments{
+       width: 90%;
+       background: rgb(255, 253, 253);
+       margin: 0 auto;
+       padding: 10px 10px;
+}
+
+.comment{
+       width: 90%;
+       margin: 10px auto;
+       background: rgb(236, 234, 234);
+       padding: 5px 5px;
+}
+
+.comment h3{
+       margin: 10px 10px;
+}
+
+.comment h5{
+       padding: 10px;
+}
+
+.comment p{
+       padding: 5px;
+       width: 80%;
+}
+
+.comment p, h5{
+       margin: 10px 40px;
+}
+
+
+.comment_form{
+       padding: 5px 5px;
+       margin: 1% auto;
+       width: 90%;
+       color: rgb(3, 3, 3);
+       display: inline-block;
+}
+
+
+.comment_form textarea{
+       padding: 4px;
+       width: 100%;
+       margin: 10px auto;
+}
+
+.comment_form button{
+       background: rgb(14, 14, 14);
+       color: white;
+       padding: 10px;
+       border: none;
+       margin: 10px auto;
+}
