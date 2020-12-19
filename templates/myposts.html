@@ -23,7 +23,7 @@
        <div class="posts">
               {% for post in posts %}
                      <div class="post">
-                            <a class="title" href="posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
+                            <a class="title" href="/posts/{{ post.id }}"><h1 class="post_title">{{ post.title }}</h1></a>
                             <img width="60%" height="200px" src="{{post.blog_img.url}}" alt="">
                             <p class="post_s_body">{{ post.short_body }}</p>
                             <h3 style="text-transform: uppercase;">Written by : {{ post.owner }}</h3>
